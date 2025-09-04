@@ -1,0 +1,20 @@
+<script>
+    const debounce=(fn,time)=>{
+        let timeout=null
+        return function(){
+            clearTimeout(timeout)
+            timeout=setTimeout(()=>{
+                fn.apply(this,arguments)
+            },time)
+        }/*
+无论原始函数fn在多么复杂的异步流程中被执行比如setTimeout,它的this都会和防抖函数被调用时保持一致
+所有传递给防抖函数的参数，都能原封不动的传给fn
+        */
+    }
+    /*
+防抖：在事件被触发n秒后再执行回调函数，如果在这段时间内又触发了该事件，则重新计时
+搜索框：当用户在搜索框输入时，不需要每输入一个字符就向服务器发送请求。通过防抖，可以在用户输入一小段时间后，才发送一次请求，大大减小服务器的压力
+窗口大小调整
+按钮防止重复点击
+    */
+</script>
