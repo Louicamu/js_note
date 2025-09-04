@@ -1,0 +1,16 @@
+<script>
+    const curry=(fn,...args)=>{
+        if(args.length>=fn.length){
+            return fn(...args)//已经达到了，开始计算,调用原始函数并返回最终的计算结果
+        }/*
+            if语句是在检查我收集到的参数的数量是否已经达到了原始函数所需要的数量
+        */
+        return (...rest)=>{//没达到，就继续返回一个函数来收集更多的参数
+            return curry(fn,...args,...rest)
+        }
+    }
+    const sum=(a,b,c,d)=>a+b+c+d
+    const curriedSum=curry(sum)
+    const result1=curriedSum(1,2,3,4)
+    console.log(result1)
+</script>
