@@ -1,0 +1,25 @@
+<html>
+    <body>
+        <h2>如何指定this的值</h2>
+        <script>
+            Function.prototype.myCall=function(thisArg,...args){
+                const key=Symbol('key')
+                thisArg[key]=this
+                const res=thisArg[key](...args)
+                delete thisArg[key]
+                return res
+            }
+
+            const person={
+                name:'labyrinth'
+            }
+            function func(numA,numB){
+                console.log(this)
+                console.log(numA,numB)
+                return numA+numB
+            }
+            const res=func.myCall(person,6,4)
+            console.log('返回值为：',res)
+        </script>
+    </body> 
+</html>

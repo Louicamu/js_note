@@ -1,0 +1,26 @@
+<body>
+    
+    <h2>手写apply方法</h2>
+    <script>
+        Function.prototype.myApply=function(thisArg,args){
+            const key=Symbol('key')
+            thisArg[key]=this
+            const res=thisArg[key](...args)
+            delete thisArg[key]
+            return res
+        }
+
+        const person={
+
+            name:'labyrinth'
+        }
+        function func(numA,numB){
+            console.log(this)
+            console.log(numA,numB)
+            return numA+numB
+        }
+        const res=func.myApply(person,[2,8])
+        console.log('the value is:',res)
+    </script>
+</body>
+

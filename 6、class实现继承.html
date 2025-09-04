@@ -1,0 +1,25 @@
+<script>
+    class Person{
+        name
+        constructor(name){
+            this.name=name
+        }
+        sayHi(){
+            console.log('Father say hi')
+        }
+    }
+    class Student extends Person{
+        age
+        constructor(name,age){
+            super(name)
+            this.age=age
+        }
+        sayHello(){
+            console.log('children say hello')
+        }
+        sayHi(){
+            console.log('children say hi')
+        }
+    }
+    const s=new Student('labyrinth')
+</script>

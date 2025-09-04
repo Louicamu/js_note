@@ -1,0 +1,29 @@
+<html>
+<head>
+    如何确认this的值
+</head>
+
+<body>
+    <h2>如何确认this的值</h2>
+    <script>
+        // 'use script'
+        // console.log(this)
+        // function func(){
+        //     'use strict'
+        //     console.log(this)
+        // }
+        // func()
+        const food={
+            name:'noodle',
+            eat(){
+                'use strict'
+                console.log(this)
+            }
+        }
+        food.eat()
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<script>
+    Function.prototype.myBind=function(thisArg,...args){
+        return(...reArgs)=>{
+            return this.call(thisArg,...args,...reArgs)
+        }
+        
+    }
+
+    
+    const person={
+        name:'labyrinth'
+    }
+    function func(numA,numB,numC,numD){
+        console.log(this)
+        console.log(numA,numB,numC,numD)
+        return numA+numB+numC+numD
+    }
+
+    const bindFunc=func.myBind(person,1,2)
+    const res=bindFunc(3,4)
+    console.log('the value is:',res)
+</script>
