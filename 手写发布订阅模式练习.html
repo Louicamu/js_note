@@ -1,0 +1,30 @@
+<script>
+    class EventEmitter{
+        constructor(){
+            this.arrayList={}
+        }
+        on(name,fn){
+            if(this.arrayList[name]&&!this.arrayList[name].includes(fn)){
+                this.arrayList[name].push(fn)
+            }else{
+                this.arrayList[name]=[fn]
+            }
+        }
+        off(name,fn){
+            if(this.arrayList[name]){
+                let idx=this.arrayList[name].indexOf(fn)
+                if(idx>-1){
+                    this.arrayList[name].splice(idx,1)
+                }
+            }
+        }
+        emit(name,...args){
+            if(this.arrayList[name]){
+                let task=[...this.arrayList[name]]
+                for(const fn of task){
+                    fn.call(this,...args)
+                }
+            }
+        }
+    }
+</script>

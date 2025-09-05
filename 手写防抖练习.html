@@ -1,5 +1,5 @@
 <script>
-    const debounce=(fn,time)=>{
+    function debounce(fn,time){
         let timeout=null
         return function(){
             clearTimeout(timeout)

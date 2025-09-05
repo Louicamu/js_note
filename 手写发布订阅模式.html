@@ -1,0 +1,52 @@
+<script>
+    class EventEmitter{
+        constructor(){
+            this.arrayList={}
+        }
+        on(name,fn){
+            if(this.arrayList[name]&&!this.arrayList[name].includes(fn)){//检查这个数组中是否已经包含了要添加的函数this
+                this.arrayList[name].push(fn)
+            }else{
+                this.arrayList[name]=[fn]
+            }
+        }
+        off(name,fn){
+            if(this.arrayList[name]){
+                let idx=this.arrayList[name].indexOf(fn)
+                /*从索引为idx的位置开始，删除一个元素，也就是说
+                    精确地从事件监听器列表中移除一个我们已经找到位置的函数
+                    它的基本语法是：
+array.splice(start, deleteCount, item1, item2, ...)
+start (必需): 这是修改的起始位置（索引）。
+deleteCount (可选): 表示要从 start 位置开始删除的元素数量。
+item1, item2, ... (可选): 表示要添加到数组的新元素，会从 start 位置开始添加。
+                */
+                this.arrayList[name].splice(idx,1)
+            }
+        }
+        emit(name,...args){
+            if(this.arrayList[name]){
+                let task=[...this.arrayList[name]]
+                for(const fn of task){
+                    fn.call(this,...args)
+                }
+            }
+        }
+    }
+    const emitter=new EventEmitter()
+    function log1(message){
+        console.log('消息',message)
+    }
+    function log2(message){
+        console.log('另一个消息',message)
+    }
+    emitter.on('message',log1)
+    emitter.on('message',log2)
+
+    console.log('第一次发布事件：')
+    emitter.emit('message','你好世界')
+    emitter.off('message',log1)
+    console.log('第二次发布事件')
+    emitter.emit('message','goodbye')
+    
+</script>
