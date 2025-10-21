@@ -1,0 +1,14 @@
+<script>
+    function shallowCopy(object){
+        if(!object||typeof object!=='object')return
+        let newObject=Array.isArray(object)?[]:{}
+        //确保了拷贝后的顶层结构和原始结构是一样的
+        for(let key in object){
+            //检查这个key是不是object自身的属性，避免拷贝到一些不必要的继承属性
+            if(object.hasOwnProperty(key)){
+                newObject[key]=object[key]
+            }
+        }
+        return newObject
+    }
+</script>

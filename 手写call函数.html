@@ -1,0 +1,17 @@
+<script>
+    Function.prototype.myCall=function(context){//所有函数的大师工具箱，无论是什么匿名函数，都可以通过原型链来找到并使用这个方法
+        if(typeof this!=='function'){
+            throw new TypeError('error')
+        }
+        context=context||window
+        context.fn=this
+        let result=null
+        const args=[]
+        for(let i=1;i<arguments.length;i++){
+            args.push(arguments[i])
+        }
+        result=context.fn(...args)//改变了this指向：通过context.fn()的方式调用，确保了函数执行时的this是我们传入的context对象
+        return result
+    }
+    /*call(context,'arg1','arg2')*/
+</script>

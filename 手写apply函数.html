@@ -1,0 +1,17 @@
+<script>
+    Function.prototype.myApply=function(context){
+        if(typeof this!=='function'){//判断调用myApply的对象是否为函数
+            throw new TypeError('error')
+        }
+        let result=null
+        context=context||window//判断context是否存在，如果未传入则为Window
+        context.fn=this//将调用myApply的函数this作为context对象的一个临时方法
+        if(arguments[1]){//arguments[1]是传入的第二个参数,如果有参数数组，则使用展开运算符将数组中的元素作为独立参数传入并执行函数
+            result=context.fn(...arguments[1])
+        }else{
+            result=context.fn()//如果没有，则直接执行函数
+        }
+        delete context.fn//将属性删除
+        return result
+    }
+</script>

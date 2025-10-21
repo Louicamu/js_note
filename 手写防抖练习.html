@@ -1,11 +1,11 @@
 <script>
-    function debounce(fn,time){
+    const debounce=(fn,time)=>{
         let timeout=null
         return function(){
             clearTimeout(timeout)
-            timeout=setTimeout(()=>{
+            timeout=setTimeout=(()=>{
                 fn.apply(this,arguments)
-            },time)
+            },this)
         }
     }
 </script>
