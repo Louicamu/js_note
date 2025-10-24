@@ -1,0 +1,10 @@
+<script>
+    Promise.resolve=function(data){
+        if(data instanceof Promise){//检查data是否是Promise的一个实例
+            return data
+        }
+        return new Promise((resolve)=>{
+            resolve(data)
+        })
+    }
+</script>

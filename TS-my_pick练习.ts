@@ -6,4 +6,4 @@ interface Todo {
 type myPick<T, K extends keyof T> = {
   [P in K]: T[P];
 };
-type TodoPreview1 = MyPick<Todo, "t1" | "t2">;
+type TodoPreview1 = myPick<Todo, "t1" | "t2">;

@@ -1,17 +1,17 @@
 <script>
-    function myPromiseAll(promises){
+    function promiseAll(promises){
         return new Promise(function(resolve,reject){
-            if(Array.isArray(promises)){
+            if(!Array.isArray(promises)){
                 throw new TypeError('not an array')
             }
             var counter=0
-            var promiseNum=promises.length
             var resolvedResult=[]
+            var promiseNum=promises.length
             for(let i=0;i<promiseNum;i++){
-                Promise.resolve(promises[i]).then(value=>{
+                Promise.resolve(promises[i]).then((value)=>{
                     counter++
                     resolvedResult[i]=value
-                    if(resolvedResult==promiseNum){
+                    if(counter==promiseNum){
                         return resolve(resolvedResult)
                     }
                 },error=>{
