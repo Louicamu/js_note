@@ -1,14 +1,18 @@
 <script>
-    function deepClone(object){
-        if(!object||typeof object!=='object'){
+    function deepClone(object) {
+        if (!object || typeof object !== 'object') {
             return
         }
-        let newObject=Array.isArray(object)?[]:{}
-        for(let key in object){
-            if(object.hasOwnProperty(key)){
-                newObject[key]=typeof object[key]==='object'?deepClone(object[key]):object[key]
+        let newObject = Array.isArray(object) ? [] : {}
+        for (let key in object) {
+            if (object.hasOwnProperty(key)) {
+                newObject[key] = typeof object[key] === 'object' ? deepClone(object[key]) : object[key]
             }
         }
         return newObject
     }
+    /*
+深拷贝会递归地复制一个对象的所有层级，它会创建一个全新的、完全独立的对象
+新对象中的所有属性也都是全新的副本，与原始对象没有任何关联。
+    */
 </script>

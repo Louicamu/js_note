@@ -1,0 +1,7 @@
+<script>
+    function myNew(constructor, ...args) {
+        const obj = Object.create(constructor.prototype)
+        const result = constructor.apply(obj, args)//apply的作用是将constructor的this传给obj，args是要传的参数
+        return result instanceof Object ? result : obj//result的原型链上是否存在Object.prototype，是用来检查result是否是对象
+    }
+</script>
