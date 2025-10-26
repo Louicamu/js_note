@@ -14,6 +14,46 @@ bool isPrime(int n){
 }
 ```
 
+###### 分饼干
+
+数字 k 有些数位变得模糊了，把 k 块饼干平分给 n 个小朋友，计算 k 有多少种可能的数值
+
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    string k_str;
+    long long n;
+    cin>>k_str>>n;
+    int len=k_str.length();
+    vector<long long> dp(n,0);
+    dp[0]=1;
+    for(int i=0;i<len;i++){
+        vector<long long> next_dp(n,0);
+        char curChar=k_str[i];
+        for(int rem=0;rem<n;rem++){
+            if(dp[rem]==0){//说明在上一步，没有构造出任何一个余数为rem的数字
+                continue;
+            }
+            for(int d=0;d<10;d++){
+                if(curChar!='X'&&curChar-'0'!=d){
+                    continue;
+                }
+                if(i==0&&len>1&&d==0){
+                    continue;
+                }
+                long long new_rem=(static_cast<long long>(rem)*10+d)%n;
+                next_dp[new_rem]+=dp[rem];
+            }
+        }
+        dp=next_dp;
+    }
+    cout<<dp[0]<<endl;
+
+    return 0;
+}
+```
+
 ###### 计算字母出现的次数
 
 ```
@@ -285,6 +325,5 @@ ostream& operator<<(ostream& os,const Student& st){
     Student::count++;
     os<<Student::count<<". "<<st.name<<" ";
 }
-
 
 ```

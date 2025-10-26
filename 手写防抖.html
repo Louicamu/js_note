@@ -1,11 +1,11 @@
 <script>
-    const debounce=(fn,time)=>{
-        let timeout=null
-        return function(){
+    const debounce = (fn, time) => {
+        let timeout = null
+        return function () {
             clearTimeout(timeout)
-            timeout=setTimeout=(()=>{
-                fn.apply(this,arguments)
-            },time)
+            timeout = setTimeout(() => {
+                fn.apply(this, arguments)
+            }, time)
         }/*
 无论原始函数fn在多么复杂的异步流程中被执行比如setTimeout,它的this都会和防抖函数被调用时保持一致
 所有传递给防抖函数的参数，都能原封不动的传给fn
