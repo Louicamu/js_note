@@ -1,0 +1,23 @@
+<script>
+    function promiseAll(promises){
+        return Promise(function(resolove,reject){
+            if(!Array.isArray(promises)){
+                throw new TypeError('not an array')
+            }
+            var promiseNum=promises.length
+            var counter=0
+            var resolvedResult=[]
+            for(let i=0;i<promiseNum;i++){
+                Promise.resolve(promises[i]).then((value)=>{
+                    resolvedResult[i]=value
+                    counter++
+                    if(counter==promiseNum){
+                        return resolve(resolvedResult)
+                    }
+                },error=>{
+                    return reject(error)
+                })
+            }
+        })
+    }
+</script>

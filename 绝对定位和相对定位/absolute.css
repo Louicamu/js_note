@@ -1,0 +1,22 @@
+.box{
+    width: 100px;
+    height: 100px;
+    border: 2px solid;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box1{
+    background-color: lightcoral;
+}
+.box2{
+    background-color: lightblue;
+    position:absolute;
+    top:20px;
+    left:30px;
+    background-color: lightskyblue;
+}
+.box3{
+    background-color: lightgreen;
+}

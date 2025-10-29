@@ -106,3 +106,25 @@ const { files, setFiles } = useStore();
 
 1. 本项目使用 use() hook 解析 nextjs15 的异步路由参数，相比 react18 需要 useEffect+Promise.then(),代码简化，无需处理加载态
 2. 隐式使用，自动批处理优化(包括异步回调)
+
+##### 为什么选用next.js
+###### 单一代码库：前后端代码在同一个仓库
+
+###### API routes
+文件系统路由
+```js
+export async function GET(req:NextRequest){
+  //处理GET请求
+}
+```
+文件即路由
+RESTful设计：通过http方法区分操作
+类型安全：ts提供完整类型支持
+
+###### 统一的api结构：
+```js
+await fetch('/api/files')
+await fetch('/api/files/123/')
+```
+无需cors:同一域名，不需要跨域配置
+相对路径：开发和生产环境自动适配

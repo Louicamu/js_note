@@ -1,0 +1,36 @@
+.grid-container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    /*定义三列，每列宽度为1fr
+    ，repeat是1fr 1fr 1fr的缩写
+    */
+    grid-template-rows: repeat(3,100px);
+    gap: 10px;
+    width: 340px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rbga(0,0,0,0.1);
+}
+/* fr是分数单位或者弹性单位，用于将网格容器中的可用空间按比例进行划分 */
+.grid-item{
+    background-color: #448aff;
+    color:white;
+    border-radius: 5px;
+    font-size: 24px;
+    font-weight: bold;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.body{
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f2f5;
+}

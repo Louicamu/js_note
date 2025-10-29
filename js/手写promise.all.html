@@ -40,4 +40,9 @@ let p3=new Promise(function (resolve,reject){
 promiseAll([p3,p1,p2]).then(res=>{
     console.log(res)
 })
+
+//将多个promise实例包装成一个新的promise实例，这个新的promise用于处理并发操作
+//它会等待所有任务都成功完成后，才宣告整个团队任务成功
+//如果任何一个失败了整个团队任务立刻宣告失败
 </script>
+
