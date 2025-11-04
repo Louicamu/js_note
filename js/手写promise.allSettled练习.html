@@ -1,5 +1,10 @@
 <script>
     function promiseAllSettled(promises){
-        return 
+        return Promise.all(promise.map((p)=>{
+            Promise.resolve(p).then(
+                value=>({status:'fulfilled',value}),
+                reason=>({status:'rejected'},error)
+            )
+        }))
     }
 </script>

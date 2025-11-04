@@ -1,10 +1,10 @@
 <script>
-    class EventEmitter{
+    class emitter{
         constructor(){
             this.arrayList={}
         }
         on(name,fn){
-            if(this.arrayList[name]){
+            if(this.arrayList[name]&&!this.arrayList[name].includes(fn)){
                 this.arrayList[name].push(fn)
             }else{
                 this.arrayList[name]=[fn]
@@ -12,15 +12,15 @@
         }
         off(name,fn){
             if(this.arrayList[name]){
-                let idx=this.arrayList[name].indexOf(fn)
-                this.arrayList[name].splice(1,idx)
+                let idx=indexOf(this.arrayList[name])
+                this.arrayList[name].splice(idx,1)
             }
         }
         emit(name,...args){
             if(this.arrayList[name]){
                 let tasks=[...this.arrayList[name]]
-                for(const fn of tasks){
-                    fn.call(fn,...args)
+                for(const c of tasks){
+                    c.apply(this,...args)
                 }
             }
         }

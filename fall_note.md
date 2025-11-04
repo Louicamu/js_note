@@ -1,3 +1,4 @@
+#### 编程题
 ###### 判断质数
 
 ```
@@ -139,6 +140,67 @@ for(int i=0;i<10;i++){
     }
 }
 ```
+###### 孤单数序列--两数之和
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+int main(){
+    int n,t;
+    cin>>n>>t;
+    vector<int> nums(n);
+    unordered_map<int,int> idx;
+    for(int i=0;i<n;i++){
+        cin>>nums[i];
+        idx[nums[i]]++;
+    }
+    for(int i=0;i<n;i++){
+        int cur_num=nums[i];
+        long long nxt_num=t-cur_num;
+        bool is_legal=true;
+        if(cur_num==nxt_num){
+            if(idx[cur_num]>1){//如果当前出现的数字大于1它就不孤单
+                is_legal=false;
+            }
+        }else{
+            if(idx.count(nxt_num)){
+                is_legal=false;
+            }
+        }
+        if(is_legal){
+            cout<<cur_num<<" ";
+        }
+    }
+    return 0;
+}
+```
+
+
+###### 友元函数之计算全班同学的平均绩点
+```cpp
+double averagegrade(student *stu,int count){
+    double total_credits=0.0;
+    double total_gpa=0.0;
+    for(int i=0;i<count;i++){
+        int j=0;
+        while(stu[i].score[j]!=-1){
+            double single_credit=stu[i].score[j];
+            double single_score=stu[i].grade[j];
+            double single_gpa=single_credit(single_score/10-5);
+            total_credits+=single_credit;
+            total_gpa+=single_gpa;
+            j++;
+        }
+    }
+    if(total_credits==0){
+        return 0.0;
+    }
+    return total_gpa/total_credits;
+}
+```
+
+
+
+
 
 #### 类
 

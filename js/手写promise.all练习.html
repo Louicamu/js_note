@@ -1,16 +1,16 @@
 <script>
     function promiseAll(promises){
-        return Promise(function(resolove,reject){
+        return new Promise(function(resolve,reject){
             if(!Array.isArray(promises)){
                 throw new TypeError('not an array')
             }
-            var promiseNum=promises.length
             var counter=0
             var resolvedResult=[]
+            var promiseNum=promises.length
             for(let i=0;i<promiseNum;i++){
                 Promise.resolve(promises[i]).then((value)=>{
-                    resolvedResult[i]=value
                     counter++
+                    resolvedResult[i]=value
                     if(counter==promiseNum){
                         return resolve(resolvedResult)
                     }
