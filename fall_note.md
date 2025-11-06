@@ -1,7 +1,7 @@
 #### 编程题
 ###### 判断质数
 
-```
+```cpp
 bool isPrime(int n){
     if(n<=1){
         return false;
@@ -197,7 +197,31 @@ double averagegrade(student *stu,int count){
     return total_gpa/total_credits;
 }
 ```
-
+###### 被n整除的n位数
+第一位数被1整除，第二位数被2整除，第三位数被3整除，第四位数被4整除
+```cpp
+int n;
+long long a,b;
+bool found=false;
+void findNumbers(int index,long long res){
+    if(index>n){
+        if(res>=a&&res<=b){
+            cout<<res<<endl;
+            found=true;
+        }
+        return;
+    }
+    for(int d=0;d<=9;d++){
+        if(index==1&&d==0){//第一位数字不能为0
+            continue;
+        }
+        long long next_number=res*10+d;
+        if(next_number%index==0){
+            findNumbers(index+1,next_number);
+        }
+    }
+}
+```
 
 
 

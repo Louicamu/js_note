@@ -15,11 +15,11 @@
     ]
     function treeToList(data){
         let res=[]
-        const dfs=(tree)=>{
-            tree.forEach((item)=>{
+        function dfs(tree){
+            tree.foreach((item)=>{
                 if(item.children){
                     dfs(item.children)
-                    delete item.children
+                    delete(item.children)
                 }
                 res.push(item)
             })
