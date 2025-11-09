@@ -197,11 +197,118 @@ double averagegrade(student *stu,int count){
     return total_gpa/total_credits;
 }
 ```
-###### 被n整除的n位数
+###### 7-51 智能护理中心统计
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+map<string,vector<string>> children;
+map<string,int> node_count;
+bool isNumber(const string& s){//判断是否为数字，如果是数字，那么他就是老人的编号
+    if(s.empty())return false;
+    for(char c:s){
+        if(!isdigit(c)){
+            return false;
+        }
+    }
+    return true;
+}
+int getTotal(const string& start_node){
+    int total=0;
+    queue<string> q;
+    q.push(start_node);
+    while(!q.empty()){
+        string cur_node=q.front();
+        q.pop();
+        if(node_count.count(cur_node)){//用.count来判断键是否存在
+            total+=node_count[cur_node];
+        }
+        if(children.count(cur_node)){//检查cur_node是否有下属
+            for(const string& child_node:children[cur_node]){//如果有下属就遍历它，bfs的核心，将未访问的结点加入待处理的队列中
+                q.push(child_node);
+            }
+        }
+    }
+    return total;
+}
+int main(){
+    int n,m;
+    cin>>n>>m;
+    vector<string> parent(n+1);//记录每位老人所属的直接管理结点
+    for(int i=0;i<m;i++){//读取m条从属关系
+        string a,b;
+        cin>>a>>b;
+        if(isNumber(a)){//a是老人的id
+            int id=stoi(a);//stoi(a)将字符串变量a转化成一个整数
+            parent[id]=b;//老人的id由b直接管理
+            node_count[b]++;//上级管理数加一
+        }else{
+            children[b].push_back(a);//说明a是一个管理结点，b是上级，将a添加到b的结点列表中
+        }
+    }
+    char command;
+    while(cin>>command&&command!='E'){
+        if(command=='Q'){
+            string node_name;
+            cin>>node_name;
+            cout<<getTotal(node_name)<<endl;
+        }else if(command=='T'){
+            int id;
+            string new_node_name;
+            cin>>id>>new_node_name;
+            string old_node_name=parent[id];//获取老人所在的管理旧管理结点
+            if(!old_node_name.empty()){//旧管理结点确实存在
+                node_count[old_node_name]--;//把旧管理结点的统计数减一
+            }
+            node_count[new_node_name]++;
+            parent[id]=new_node_name;
+        }
+    }
+    return 0;
+}
+```
+
+
+
+###### 7-46 胖达的山头
+这道题的难点是处理输入，逻辑整体上不难,例如scanf
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+using Event=pair<int,int>;
+int main(){
+    int n;
+    scanf("%d",&n);
+    vector<Event> events;
+    for(int i=0;i<n;i++){
+        int h1,m1,s1,h2,m2,s2;
+        scanf("%d:%d:%d %d:%d:%d",&h1,&m1,&s1,&h2,&m2,&s2);
+        int startTime=3600*h1+60*m1+s1;
+        int endTime=3600*h2+60*m2+s2;
+        events.push_back({startTime,1});
+        events.push_back({endTime+1,-1});
+    }
+    sort(events.begin(),events.end());
+    int max_pandas=0;
+    int cur_pandas=0;
+    long long a=0;
+    for(const auto& event:events){
+        cur_pandas+=event.second;
+        if(max_pandas<cur_pandas){
+            max_pandas=cur_pandas;
+        }
+    }
+    a=max_pandas;
+    printf("%lld",a);
+
+    return 0;
+}
+```
+
+###### 7-47 被n整除的n位数
 第一位数被1整除，第二位数被2整除，第三位数被3整除，第四位数被4整除
 ```cpp
 int n;
-long long a,b;
+long long a,b;//区间范围
 bool found=false;
 void findNumbers(int index,long long res){
     if(index>n){
@@ -222,7 +329,143 @@ void findNumbers(int index,long long res){
     }
 }
 ```
+###### 7-20现代战争
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+struct Buildings{
+    int value;
+    int r,c;
+};
+bool compare(const Buildings& A,const Buildings& B){
+    return A.value>B.value;
+}
+int main(){
+    int n,m,k;
+    cin>>n>>m>>k;
+    vector<vector<int>> grid(n,vector<int>(m));
+    vector<Buildings> buildings;
+    for(int i=0;i<n;i++){
+        for(int j=0;j<m;j++){
+            cin>>grid[i][j];
+            buildings.push_back({grid[i][j],i,j});
+        }
+    }
+    sort(buildings.begin(),buildings.end(),compare);
+    vector<bool> r_destroyed(n,false);
+    vector<bool> c_destroyed(m,false);
+    int ans=0;
+    for(const auto& building:buildings){
+        if(ans==k){
+            break;
+        }
+        if(r_destroyed[building.r]||c_destroyed[building.c]){
+            continue;
+        }
+        r_destroyed[building.r]=true;
+        c_destroyed[building.c]=true;
+        ans++;
+    }
+    for(int i=0;i<n;i++){
+        if(!r_destroyed[i]){
+            bool first_in_row=true;
+            for(int j=0;j<m;j++){
+                if(!c_destroyed[j]){
+                    if(!first_in_row){
+                        cout<<" ";
+                    }
+                    cout<<grid[i][j];
+                    first_in_row=false;
+                }
+            }
+            cout<<"\n";
+        }
+    }
+    return 0;
+}
+```
+###### 7-19大幂数
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+long long power(long long base,long long exp,long long limit){
+    long long res=1;
+    for(int i=0;i<exp;i++){
+        if(res*base>limit){
+            return limit+1;
+        }
+        res*=base;
+    }
+    return res;
+}
+int main(){
+    int n;
+    cin>>n;
+    long long final_k=0;
+    long long final_m=0;
+    bool found=false;
+    for(int k=31;k>=1;k--){
+        long long cur_sum=0;
+        for(long long m=1;;m++){
+            long long index=power(m,k,n);
+            if(index>n){
+                break;
+            }
+            if(index+cur_sum>n){
+                break;
+            }
+            cur_sum+=index;
+            if(cur_sum==n){
+                final_k=k;
+                final_m=m;
+                found=true;
+                break;
+            }
+        }
+        if(found){
+            break;
+        }
+    }
+    if(found){
+        cout<<"1^"<<final_k;
+        for(int i=2;i<=final_m;i++){
+            cout<<"+"<<i<<"^"<<final_k;
+        }cout<<endl;
+    }else{
+        cout<<"Impossible for "<<n<<".";
+    }
 
+    return 0;
+}
+```
+###### 7-16 字符串检测,含大小写检测
+```cpp
+#include<bits/stdc++.h>
+using namespace std;
+string toLower(const string& s){
+    string lower_s=s;
+    for(char& c:lower_s){
+        c=tolower(c);//将c递归地转化成小写字母tolower(c);
+    }
+    return lower_s;
+}
+int main(){
+    int T;
+    cin>>T;
+    cin.ignore();
+    for(int i=0;i<T;i++){
+        string line;
+        getline(cin,line);
+        string lower_line=toLower(line);
+        if(lower_line.find("shinto mekkaku")!=string::npos){
+            cout<<"Medaka Kuroiwa"<<endl;
+        }else{
+            cout<<"Bonjsada";
+        }
+    }
+    return 0;
+}
+```
 
 
 
@@ -234,7 +477,7 @@ void findNumbers(int index,long long res){
 
 ###### Tree 类的构造函数
 
-```
+```cpp
 Tree::Tree(){
     ages=1;
 }
