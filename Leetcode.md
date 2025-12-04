@@ -36,13 +36,13 @@ var canFinish=function(numCourses,prerequisities){
 ```
 # 链表题
 ## 21.合并两个有序链表
-```
+```js
 while(list1.val<list2.val){
     list1.next=mergeTwoLists(list1.next,list2)
     return list1
 }
 list2.next=mergeTwoLists(list1,list2.next)
-retur list2
+return list2
 ```
 ## 160.相交链表
 ![alt text](image.png)

@@ -616,7 +616,7 @@ Complex AddComplex(const Complex& x,const Complex& y){
 
 题目要求：定义 boat 与 car 两个类，二者都有 weight 属性，定义二者的一个友元函数 totalweight()，计算二者的重量和。
 
-```
+```cpp
 class car;
 class boat{
 private:
@@ -643,7 +643,7 @@ int totalweight(boat b,car c){
 
 ###### 学生成绩的输入和输出--静态的数据成员
 
-```
+```cpp
 class Student{
 private:
     static int count;
@@ -654,5 +654,77 @@ ostream& operator<<(ostream& os,const Student& st){
     Student::count++;
     os<<Student::count<<". "<<st.name<<" ";
 }
+
+```
+###### vector--定义vector类
+```cpp
+template <class T>
+class Vector{
+private:
+    T* data;
+    int cur_capacity;
+    int cur_size;
+public:
+    Vector():data(nullptr),cur_capacity(0),cur_size(0){}
+    ~Vector(){
+        delete[] data;
+    }
+    Vector(const Vector<T>& other){//拷贝运算构造符
+        cur_size=other.size;
+        cur_capacity=other.capacity;
+        if(cur_capacity>0){
+            data=new T[cur_capacity];
+            for(int i=0;i<cur_size;i++){
+                data[i]=other.data[i];
+            }
+        }else{
+            data=nullptr;
+        }
+    }
+    Vector<T>& operator=(const Vector<T>& other){
+        if(this==&other){
+            return *this;
+        }
+        delete[] data;
+        cur_size=other.cur_size;
+        cur_capacity=other.cur_capacity;
+        if(cur_capacity>0){
+            data=new T[capacity];
+            for(int i=0;i<cur_size;i++){
+                data[i]=other.data[i];
+            }
+        }else{
+            data=nullptr;
+        }
+        return *this;
+    }
+    int add(T element){
+        if(cur_size==cur_capacity){
+            int new_capacity=(cur_capacity==0)?1:cur_capacity*2;//当容量为0时，那么新的容量就设置为1，否则新容量就是当前容量的两倍
+            T* new_data=new T[new_capacity];
+            for(int i=0;i<cur_size;i++){    
+                new_data[i]=data[i];
+            }
+            delete[] data;
+            data=new_data;
+            cur_capacity=new_capacity;
+        }
+        data[cur_size]=element;
+        return cur_size++;
+    }
+    void remove(int index){
+        for(int i=0;i<cur_size-1;i++){
+            data[i]=data[i+1];
+        }
+        cur_size--;
+    }
+    T& operator[](int index){
+        return data[index];
+    }
+    int get_size() const{
+        return cur_size;
+    }
+};
+
 
 ```

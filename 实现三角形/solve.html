@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>查看三角形</title>
+    <style>
+        /* 这里是 CSS 样式，是让三角形“显形”的关键 */
+        .triangle-up {
+            /* 1. 核心：宽高必须设为 0 */
+            width: 0;
+            height: 0;
+
+            /* 2. 把左右边框设为透明 (transparent)，撑开宽度 */
+            /* 50px 决定了三角形一般的宽度 */
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+
+            /* 3. 把下边框设为有颜色 */
+            /* 100px 决定了三角形的高度 */
+            /* 想要三角形向上指，就给“底座”（border-bottom）上色 */
+            border-bottom: 100px solid red; 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 这是你写的那行代码 -->
+    <div class="triangle-up"></div>
+
+</body>
+</html>
