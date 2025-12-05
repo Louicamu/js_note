@@ -1,0 +1,1 @@
+type concat<T extends any[],K extends  any[]>=[...T,...K]

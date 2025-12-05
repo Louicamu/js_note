@@ -1,4 +1,4 @@
-Array.prototype.flat=function(deep=1){
+Array.prototype.myflat=function(deep=1){
     let res=[]
     deep--
     for(const p of this){

@@ -1,14 +1,13 @@
 <script>
     function deepClone(object){
-        if(!Array.isArray(object)){
-            throw new TypeError("not an array")
+        if(!object||typeof object!=='object'){
+            return 
         }
         let newObj=Array.isArray(object)?[]:{}
-        for(let key of object){
+        for(const key of object){
             if(object.hasOwnProperty(key)){
-                newObj[key]=typeof object ==='object'?deepClone(object[key]):object[key]
+                newObj[key]=typeof object[key]==='object'?deepClone(objcet[key]):object[key]
             }
         }
-        return newObj
     }
 </script>

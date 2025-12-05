@@ -1,26 +1,26 @@
 <script>
-    class emit{
+    class Emit{
         constructor(){
-            this.arraryList=[]
+            this.arrayList=[]
         }
         on(name,fn){
-            if(this.arraryList[name]&&!this.arraryList[name].includes(fn)){
-                this.arraryList[name].push(fn)
+            if(this.arrayList[name]&&!this.arrayList.includes(fn)){
+                this.arrayList[name].push(fn)
             }else{
-                this.arraryList[name]=[fn]
+                this.arrayList[name]=[fn]
             }
         }
         off(name,fn){
-            if(this.arraryList[name]){
-                let idx=this.arraryList[name].indexOf(fn)
-                this.arraryList[name].splice(idx,1)
+            if(this.arrayList[name]){
+                let idx=this.arrayList[name].indexOf(fn)
+                this.arrayList[name].splice(idx,1)
             }
         }
-        emit(fn,...args){
-            if(this.arraryList[name]){
-                let tasks=[...this.arraryList[name]]
+        emit(name,...args){
+            if(this.arrayList[name]){
+                let tasks=[...this.arrayList[name]]
                 for(const fn of tasks){
-                    fn.call(this,args)
+                    fn.call(this,...args)
                 }
             }
         }

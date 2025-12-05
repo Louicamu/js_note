@@ -1,1 +1,1 @@
-type aExclude<T,U>=T extends U?never:T
+type exclude<T,U>=T extends U?never:T

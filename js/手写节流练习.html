@@ -3,7 +3,7 @@
         let last=0
         return function(){
             let now=Date.now()
-            if(now-last>=delay){
+            if(now-last>=0){
                 fn.apply(this,arguments)
                 last=now
             }
