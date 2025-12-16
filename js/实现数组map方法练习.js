@@ -1,4 +1,4 @@
-Array.prototype.myMap=function(cb){
+Array.prototype.mymap=function(cb){
     const newArr=[]
     for(let i=0;i<this.length;i++){
         newArr.push(cb(this[i],i,this))

@@ -2,8 +2,8 @@
     const throttle=(fn,delay)=>{
         let last=0
         return function(){
-            let now=Date.now()
-            if(now-last>=0){
+            const now=Date.now()
+            if(now-last>=delay){
                 fn.apply(this,arguments)
                 last=now
             }

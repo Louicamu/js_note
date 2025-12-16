@@ -4,12 +4,9 @@ function listToTree(arrayList,id,list){
             list.push(item)
         }
     }
-    for(let i of list){
+    for(const i of list){
         i.children=[]
         listToTree(arrayList,i.id,i.children)
-        if(i.children.length==0){
-            delete i.children
-        }
+        
     }
-    return list
 }

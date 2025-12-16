@@ -1,6 +1,6 @@
-Array.prototype.myflat=function(deep=1){
-    let res=[]
+Array.prototype.flat=function(deep=1){
     deep--
+    let res=[]
     for(const p of this){
         if(Array.isArray(p)&&deep>=0){
             res=res.concat(p.flat(deep))

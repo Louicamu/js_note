@@ -1,5 +1,5 @@
 function flatten(arr){
-    return arr.reduce((nums,cur)=>{
-        return Array.isArray(cur)?nums.concat(flatten(cur)):nums.concat(cur)
-    })
+    return arr.reduce((acc,cur)=>{
+        return Array.isArray(cur)?acc.concat(flatten(cur)):acc.concat(cur)
+    },[])
 }

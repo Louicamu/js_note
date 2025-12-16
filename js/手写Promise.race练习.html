@@ -1,14 +1,13 @@
 <script>
-    Promise.myRace=function(arr){//race故名思义，赛跑，和谁抢
+    function race(promises){
         return new Promise((resolve,reject)=>{
-            for(let item of arr){//为了防止item不是Promise
-                Promise.resolve(item).then(res=>{//自动将item转换为Promise
-                    resolve(res)//竞争成功
-                })
-                .catch(error=>{
-                    reject(error)
+            for(let item of promises){
+                Promise.resolve(item).then((res)=>{
+                    return resolve(res)
+                }).catch((error)=>{
+                    return reject(error)
                 })
             }
-        })  
+        })
     }
 </script>

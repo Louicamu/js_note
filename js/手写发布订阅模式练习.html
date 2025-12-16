@@ -1,16 +1,16 @@
 <script>
-    class Emit{
+    class emit{
         constructor(){
-            this.arrayList=[]
+            this.arrayList={}
         }
-        on(name,fn){
-            if(this.arrayList[name]&&!this.arrayList.includes(fn)){
+        on(fn,name){
+            if(this.arrayList[name]&&!this.arrayList[name].includes(fn)){
                 this.arrayList[name].push(fn)
             }else{
                 this.arrayList[name]=[fn]
             }
         }
-        off(name,fn){
+        off(fn,name){
             if(this.arrayList[name]){
                 let idx=this.arrayList[name].indexOf(fn)
                 this.arrayList[name].splice(idx,1)
@@ -18,8 +18,8 @@
         }
         emit(name,...args){
             if(this.arrayList[name]){
-                let tasks=[...this.arrayList[name]]
-                for(const fn of tasks){
+                let task=[...this.arrayList[name]]
+                for(const fn of task){
                     fn.call(this,...args)
                 }
             }
