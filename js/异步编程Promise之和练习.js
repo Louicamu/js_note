@@ -5,17 +5,18 @@ function remoteAdd(a,b){
         },100)
     })
 }
+
 async function solve(arr){
     if(arr.length==0)return 0
     if(arr.length==1)return arr[0]
     const promises=[]
     for(let i=0;i<arr.length;i+=2){
-        if(i+1<arr.length){//如果能成对，就调用加法
+        if(i+1<arr.length){
             promises.push(remoteAdd(arr[i],arr[i+1]))
         }else{
-            promises.push(Promise.resolve(arr[i]))//如果是奇数个，最后一个数进入下一轮
+            promises.push(Promise.resolve(arr[i]))
         }
     }
-    const results=await Promise.all(promises)//并行等待所有的结果
-    return solve(results)//递归进入下一轮
+    const results=await Promise.all(promises)
+    return solve(results)
 }

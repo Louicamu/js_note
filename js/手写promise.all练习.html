@@ -1,6 +1,6 @@
 <script>
     function promiseAll(promises){
-        return Promise((resolve,reject)=>{
+        return new Promise((resolve,reject)=>{
             if(!Array.isArray(promises)){
                 throw new TypeError("error")
             }
@@ -9,13 +9,13 @@
             var promiseNum=promises.length
             for(let i=0;i<promiseNum;i++){
                 Promise.resolve(promises[i]).then((value)=>{
-                    resolvedResult[i]=value
                     counter++
+                    resolvedResult[i]=value
                     if(counter==promiseNum){
-                        resolve(resolvedResult)
+                        return resolve(resolvedResult)
                     }
                 },error=>{
-                    reject(error)
+                    return reject(error)
                 })
             }
         })

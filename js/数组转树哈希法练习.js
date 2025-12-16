@@ -8,7 +8,7 @@ function treeToList(items){
         let id=item.id
         let pid=item.pid
         let treeItem=map[id]
-        if(pid===0){
+        if(pid==0){
             res.push(treeItem)
         }else{
             if(map[pid]){

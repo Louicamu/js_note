@@ -1,16 +1,23 @@
 <script>
     Function.prototype.myCall=function(context){
-        if(typeof this!=='function'){
-            throw new TypeError('error')
+        if(typeof this!=="function"){
+            throw new TypeError("error")
         }
-        let result=null
         context=context||window
         context.fn=this
+        let res=null
         let args=[]
         for(let i=1;i<arguments.length;i++){
             args.push(arguments[i])
         }
-        result=context.fn(...args)
-        return result
+        res=context.fn(...args)
+        return res
     }
 </script>
+var name="全局"
+var obj:{name:"对象"}
+function say(age,hobby){
+    console.log(this.name+"今年 "+age+" 岁，喜欢"+hobby)
+}
+say.mycall(obj,18,"打篮球")
+这一行代码就编程obj.say(18,"打篮球")
